@@ -1,0 +1,17 @@
+
+
+/dist/
+*.log
+node_modules
+.env
+
+.settings/
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
+modules/.settings
+modules/.vscode
+
+# Ignore npm/yarn debug log
+npm-debug.log
+yarn-error.log
