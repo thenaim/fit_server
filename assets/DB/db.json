@@ -1,111 +1,5 @@
 {
-  "videos": [
-    {
-      "videoId": "F66kEtFD5ZA",
-      "title": "Утренняя зарядка на 10 минут! Фитнес Дома",
-      "lengthSeconds": "645",
-      "keywords": [
-        "татьяна",
-        "чабанец",
-        "tgym",
-        "tglow",
-        "фитнес",
-        "похудеть",
-        "зарядка утром",
-        "разминка",
-        "растяжка",
-        "упражнения",
-        "девушка",
-        "тренер",
-        "качаем пресс",
-        "приседания",
-        "отжимания",
-        "быстрая тренировка",
-        "легкая зарядка",
-        "тренировка",
-        "утро",
-        "утренняя",
-        "10 минут",
-        "все тело",
-        "сексуальная",
-        "секси"
-      ],
-      "channelId": "UCBXYBB6aPnNQVgRwVfbJO3A",
-      "isOwnerViewing": false,
-      "shortDescription": "Доброе утро ребята!\nЧтобы ваш день был энергичным и веселым, конечно же его нужно начинать с зарядки!\n\n----------------------------------------­----------------------------------------­------------\nСоставление индивидуальных программ \"TGym Program\"\nhttp://vk.com/topic-44770386_27973043\n----------------------------------------­----------------------------------------­------------\n\nПодписывайся на мой канал! Ничего не пропускай!\nhttp://www.youtube.com/TheTGym\n\n2-й канал (Макияж, уход, влоги)\nhttp://www.youtube.com/TheTGlow\n\nТаня Чабанец (ВКонтакте) -------- http://vk.com/thetgym\nГруппа TheTGym (ВКонтакте) --------- http://vk.com/t_gym\nТаня Чабанец (Facebook) --------- http://www.facebook.com/tanya.chabaneth",
-      "isCrawlable": true,
-      "thumbnail": {
-        "thumbnails": [
-          {
-            "url": "https://i.ytimg.com/vi/F66kEtFD5ZA/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLBsQNwQxXgW-oRIWc-7JXoQNM4hVg",
-            "width": 168,
-            "height": 94
-          },
-          {
-            "url": "https://i.ytimg.com/vi/F66kEtFD5ZA/hqdefault.jpg?sqp=-oaymwEiCMQBEG5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLCiZ8DhyV6Y73IoNx22fOGrNqNzCw",
-            "width": 196,
-            "height": 110
-          },
-          {
-            "url": "https://i.ytimg.com/vi/F66kEtFD5ZA/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBs-TJb7Vo9f0yVFJrFmnLZICjK-A",
-            "width": 246,
-            "height": 138
-          },
-          {
-            "url": "https://i.ytimg.com/vi/F66kEtFD5ZA/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCFqWS99x7VmnsjIhfry7AvIWGNyg",
-            "width": 336,
-            "height": 188
-          },
-          {
-            "url": "https://i.ytimg.com/vi/F66kEtFD5ZA/maxresdefault.jpg",
-            "width": 1920,
-            "height": 1080
-          }
-        ]
-      },
-      "averageRating": 4.84266,
-      "allowRatings": true,
-      "viewCount": "3532217",
-      "author": "TGYM - лучший фитнес канал",
-      "isPrivate": false,
-      "isUnpluggedCorpus": false,
-      "isLiveContent": false,
-      "authorDetail": {
-        "id": "UCBXYBB6aPnNQVgRwVfbJO3A",
-        "name": "TGYM - Best Fitness Channel",
-        "avatar": "https://yt3.ggpht.com/a/AATXAJwiYoZSD7qM7VrtkqHN9YMn4Z-xLWQN3givHw=s48-c-k-c0xffffffff-no-rj-mo",
-        "verified": true,
-        "user": "TheTGym",
-        "channel_url": "https://www.youtube.com/channel/UCBXYBB6aPnNQVgRwVfbJO3A",
-        "user_url": "https://www.youtube.com/user/TheTGym"
-      },
-      "published": 1368144000000,
-      "formats": [
-        {
-          "mimeType": "video/mp4; codecs=\"avc1.64001F, mp4a.40.2\"",
-          "qualityLabel": "720p",
-          "width": 1280,
-          "height": 720,
-          "quality": "hd720",
-          "projectionType": "RECTANGULAR",
-          "container": "mp4",
-          "codecs": "avc1.64001F, mp4a.40.2"
-        },
-        {
-          "mimeType": "video/mp4; codecs=\"avc1.42001E, mp4a.40.2\"",
-          "qualityLabel": "360p",
-          "width": 640,
-          "height": 360,
-          "quality": "medium",
-          "projectionType": "RECTANGULAR",
-          "container": "mp4",
-          "codecs": "avc1.42001E, mp4a.40.2"
-        }
-      ],
-      "gender": "asd",
-      "type": "asdasd"
-    },
-    {
+  "videos": [{
       "videoId": "EaO0OjSRVp4",
       "title": "Фитнес для мужчин от А до Я (полная версия)",
       "lengthSeconds": "1331",
@@ -114,8 +8,7 @@
       "shortDescription": "http://poxydetprosto.com/",
       "isCrawlable": true,
       "thumbnail": {
-        "thumbnails": [
-          {
+        "thumbnails": [{
             "url": "https://i.ytimg.com/vi/EaO0OjSRVp4/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLCy3RXysnGTkfdbHswE6KZvlgrXKA",
             "width": 168,
             "height": 94
@@ -154,18 +47,16 @@
         "user_url": "https://www.youtube.com/user/poxydetprosto"
       },
       "published": 1344556800000,
-      "formats": [
-        {
-          "mimeType": "video/mp4; codecs=\"avc1.42001E, mp4a.40.2\"",
-          "qualityLabel": "360p",
-          "width": 624,
-          "height": 360,
-          "quality": "medium",
-          "projectionType": "RECTANGULAR",
-          "container": "mp4",
-          "codecs": "avc1.42001E, mp4a.40.2"
-        }
-      ],
+      "formats": [{
+        "mimeType": "video/mp4; codecs=\"avc1.42001E, mp4a.40.2\"",
+        "qualityLabel": "360p",
+        "width": 624,
+        "height": 360,
+        "quality": "medium",
+        "projectionType": "RECTANGULAR",
+        "container": "mp4",
+        "codecs": "avc1.42001E, mp4a.40.2"
+      }],
       "gender": "asd",
       "type": "asdasd"
     },
@@ -189,8 +80,7 @@
       "shortDescription": "Денис Гаффиулин в программе Мотивация показывает пример короткой тренировки для тех, кто хочет попробовать кроссфит\n\nskrodina.ru\n32-33-33",
       "isCrawlable": true,
       "thumbnail": {
-        "thumbnails": [
-          {
+        "thumbnails": [{
             "url": "https://i.ytimg.com/vi/lZ24oz_w_LU/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLDnjwB_UMqmPKq1rN1paACsXlXRTA",
             "width": 168,
             "height": 94
@@ -234,8 +124,7 @@
         "user_url": "https://www.youtube.com/user/"
       },
       "published": 1511222400000,
-      "formats": [
-        {
+      "formats": [{
           "mimeType": "video/mp4; codecs=\"avc1.64001F, mp4a.40.2\"",
           "qualityLabel": "720p",
           "width": 1280,
@@ -279,8 +168,7 @@
       "shortDescription": "Всем привет! Готовимся к пляжному сезону вместе со мной!\n\nКаждый понедельник я буду выкладывать новое задание на всю неделю.\n\nВыполняйте этот комплекс каждый день, в любое удобное время. Перед тренировкой выполните самостоятельно разминку.\n\nВ воскресенье выходной.\n\nСамая результативная программа тренировок дома для здорового похудения WOWBODY\n– схемы питания и рецепты!\n– ежедневные тренировки!\n– советы и мотивация!\nПодробнее – http://bit.ly/37ZJwQp\n\nТеперь я в инста – https://instagram.com/bogdanjulia/",
       "isCrawlable": true,
       "thumbnail": {
-        "thumbnails": [
-          {
+        "thumbnails": [{
             "url": "https://i.ytimg.com/vi/Aa7xxvGtVhA/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLAOzb6ZpWRozM2y343CfZC1_uS2AA",
             "width": 168,
             "height": 94
@@ -319,8 +207,7 @@
         "user_url": "https://www.youtube.com/user/fitnessdoma"
       },
       "published": 1425772800000,
-      "formats": [
-        {
+      "formats": [{
           "mimeType": "video/mp4; codecs=\"avc1.64001F, mp4a.40.2\"",
           "qualityLabel": "720p",
           "width": 1280,
@@ -369,8 +256,7 @@
       "shortDescription": "Подпишись на канал - https://goo.gl/B4Yjz9\nУпражнения для похудения от канала Workout. Фитнес дома. Упражнения для дома. Как похудеть дома.\n\nВКонтакте: https://vk.com/fitness.blog\nFacebook: https://www.facebook.com/workout.blog\nInstagram: https://instagram.com/likeworkout/",
       "isCrawlable": true,
       "thumbnail": {
-        "thumbnails": [
-          {
+        "thumbnails": [{
             "url": "https://i.ytimg.com/vi/AiOmFgqzhUU/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLCqhB4cQPZzyI-6BbMXyTiRB_y4Xg",
             "width": 168,
             "height": 94
@@ -414,8 +300,7 @@
         "user_url": "https://www.youtube.com/user/"
       },
       "published": 1459728000000,
-      "formats": [
-        {
+      "formats": [{
           "mimeType": "video/mp4; codecs=\"avc1.64001F, mp4a.40.2\"",
           "qualityLabel": "720p",
           "width": 1280,
@@ -443,8 +328,7 @@
   "bookmarks": [],
   "settings": [],
   "stingrays": [],
-  "exercises_types": [
-    {
+  "exercises_types": [{
       "id": 1,
       "name": "Abs",
       "image": "cat0.png",
@@ -717,8 +601,7 @@
       "image": "cat2_v4.png"
     }
   ],
-  "exercises": [
-    {
+  "exercises": [{
       "id": 1,
       "id_type": 1,
       "name": "Incline Bench Sit-Ups",
@@ -6545,8 +6428,7 @@
       ]
     }
   ],
-  "meals": [
-    {
+  "meals": [{
       "id": "1zgda0zg5",
       "name": "Закрытый фруктовый пирог с пряной вишней и овсянкой",
       "steps": "Приготовьте овсянку и снимите с огня. Поставьте кастрюлю с длинной ручкой и антипригарной поверхностью на огонь, налейте кокосового масла. Разогрейте её. Высыпьте в кастрюлю ягоды. Приправьте голубику щепоткой корицы и перемешайте. Уберите ягоды с огня и дайте соусу время загустеть. Тщательно размешайте и добавьте еще немного корицы по желанию. Полейте овсянку ягодным сиропом. Украсьте блюдо свежей гранолой, чтобы прибавить хруста. Приятного аппетита!",
