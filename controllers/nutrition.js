@@ -1,27 +1,27 @@
+const DATABASE = require('../db');
+
 /**
  * GET /nutritions
  * get nutritions
  */
 exports.getNutritions = (req, res) => {
-    const stingray = res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).value();
+    const stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
 
-    const nutritions = res.db.get(`meals`).filter({
+    const nutritions = DATABASE.stingray.prepare(`SELECT * FROM nutritions WHERE lang = @lang AND day = @day AND type = @type`).all({
         lang: stingray.lang,
         day: +req.query.day,
         type: stingray.meal ? 'muscle_building' : 'weight_loss'
-    }).value();
-
-    const bookmarks = res.db.get('bookmarks').filter({
-        stingray: req.query.stingray,
-        type: 'nutrition'
-    }).value();
+    });
 
     nutritions.forEach(element => {
         element.image = encodeURIComponent(element.image);
-        const booked = bookmarks.findIndex(obj => obj.id === element.id);
-        if (booked !== -1) {
+        // check bookmarked or not
+        const checkBookmark = DATABASE.stingray.prepare(`SELECT * FROM bookmarks WHERE stingray = ? AND id_type = ? AND type = ?`).get(
+            stingray.id,
+            element.id.toString(),
+            'nutrition'
+        );
+        if (checkBookmark) {
             element.bookmark = true;
         }
     });

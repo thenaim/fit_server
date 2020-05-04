@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "^7.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -18,6 +19,7 @@
     "node-fetch": "^2.6.0",
     "node-telegram-bot-api": "^0.40.0",
     "node-vk-bot-api": "^3.3.3",
+    "path": "^0.12.7",
     "request": "^2.88.0",
     "socks5-https-client": "^1.2.1",
     "ytdl-core": "^2.0.0"

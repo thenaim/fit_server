@@ -1,24 +1,24 @@
+const DATABASE = require('../db');
+const exercisesController = require('./exercises');
 /**
  * GET /bookmarks
  * get user bookmarks
  */
 exports.getBookmarks = (req, res) => {
-    const stingray = res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).value();
+    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
+    stingray.stats = JSON.parse(stingray.stats);
 
-    const bookmarks = res.db.get('bookmarks').filter({
-        stingray: req.query.stingray,
-        type: req.query.type
-    }).value();
-    if (!bookmarks) return res.json([]);
+    const bookmarks = DATABASE.stingray.prepare(`SELECT * FROM bookmarks WHERE stingray = ? AND type = ?`).all(
+        stingray.id,
+        req.query.type
+    );
 
     if (req.query.type === "video") {
         const videos = res.db.get('videos').value();
         const videosFinal = [];
 
         bookmarks.forEach(element => {
-            const vid = videos.find(x => x.videoId === element.id);
+            const vid = videos.find(x => x.videoId === element.id_type);
             if (vid) {
                 vid.bookmark = true;
                 videosFinal.push(vid);
@@ -29,15 +29,16 @@ exports.getBookmarks = (req, res) => {
     }
 
     if (req.query.type === "exercise") {
-        const exercises = res.db.get('exercises').filter({
-            gender: stingray.gender,
-        }).value();
         let exercisesFinal = [];
         bookmarks.forEach(element => {
-            let exer = exercises.find(x => x.id === +element.id);
-            if (exer) {
-                exer.bookmark = true;
-                exercisesFinal.push(exer);
+            let exercise = DATABASE[stingray.gender].prepare(`SELECT exercises.id, exercises.name, exercises.text, foto.name AS img_name, foto.number
+            FROM exercises INNER JOIN foto ON foto.id_exercise = exercises.id_exercise
+            WHERE exercises.id = ?`).get(+element.id_type);
+
+            if (exercise) {
+                exercise.images = exercisesController.addImages(stingray.gender, exercise.img_name, exercise.number);
+                exercise.bookmark = true;
+                exercisesFinal.push(exercise);
             }
         });
 
@@ -45,15 +46,15 @@ exports.getBookmarks = (req, res) => {
     }
 
     if (req.query.type === "nutrition") {
-        const nutritions = res.db.get(`meals`).value();
         const nutritionsFinal = [];
-
         bookmarks.forEach(element => {
-            let book = nutritions.find(x => x.id === element.id);
-            if (book) {
-                book.image = encodeURIComponent(book.image);
-                book.bookmark = true;
-                nutritionsFinal.push(book);
+            let nutritionCheck = DATABASE.stingray.prepare(`SELECT * FROM nutritions WHERE id = @id`).get({
+                id: element.id_type
+            });
+            if (nutritionCheck) {
+                nutritionCheck.image = encodeURIComponent(nutritionCheck.image);
+                nutritionCheck.bookmark = true;
+                nutritionsFinal.push(nutritionCheck);
             }
         });
 
@@ -66,34 +67,38 @@ exports.getBookmarks = (req, res) => {
  * add or delete user bookmark
  */
 exports.addDeleteBookmarks = (req, res) => {
-    const stingray = res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).value();
-    if (!stingray) return res.json({
-        stingrayNotFound: true
-    });
+    const stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
 
     let bookmark = {
-        stingray: req.query.stingray,
-        id: req.query.id,
+        stingray: stingray.id,
+        id_type: req.query.id,
         type: req.query.type
     };
 
-    const checkBookmark = res.db.get('bookmarks').find(bookmark).value();
+    const checkBookmark = DATABASE.stingray.prepare(`SELECT * FROM bookmarks WHERE stingray = @stingray AND id_type = @id_type AND type = @type`).get(
+        bookmark
+    );
+
     if (checkBookmark) {
-        res.db.get('bookmarks').remove(bookmark).write();
+        const deleteBookmark = DATABASE.stingray.prepare(`DELETE FROM bookmarks WHERE id = ?`).run(
+            checkBookmark.id
+        );
         bookmark.added = false;
         return res.json(bookmark);
     }
-    res.db.get('bookmarks').push(bookmark).write();
+
+    const bookmarkINSERT = DATABASE.stingray.prepare('INSERT INTO bookmarks VALUES (NULL, @id_type, @type, @stingray)');
+    bookmarkINSERT.run(bookmark);
     bookmark.added = true;
 
     // Add fit points for add/delete bookmark
     stingray.stats[0].points += 1;
 
-    res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).assign(stingray).write();
+    let stingrayUpdate = DATABASE.stingray.prepare(`UPDATE stingray SET stats = @stats WHERE id = @id`);
+    stingrayUpdate.run({
+        stats: JSON.stringify(stingray.stats),
+        id: stingray.id
+    });
 
     return res.json(bookmark);
 };

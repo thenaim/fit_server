@@ -1,23 +1,26 @@
+const DATABASE = require('../db');
+
 /**
  * GET /stingray
  * returns id and ather keys
  */
 exports.getKeys = (req, res) => {
-    let stingray = res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).value();
-    if (stingray) return res.json(stingray);
+    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
+    if (stingray) {
+        stingray.stats = JSON.parse(stingray.stats);
+        return res.json(stingray);
+    }
 
     stingray = {
-        id: Math.random().toString(36).toUpperCase().slice(-6),
-        isDark: true, // dark|light
+        id: makeid(8),
+        isDark: 1, // dark|light
         gender: 'woman', // man|woman
-        meal: true, // muscle_building|weight_loss
+        meal: 1, // muscle_building|weight_loss
         lang: 'ru',
         vkId: '',
-        vkIntegrated: false,
+        vkIntegrated: 0,
         tgId: '',
-        tgIntegrated: false,
+        tgIntegrated: 0,
 
         // Stats
         stats: [{
@@ -62,6 +65,22 @@ exports.getKeys = (req, res) => {
             }
         ]
     };
-    res.db.get('stingrays').push(stingray).write();
+
+    // Save sqlite
+    stingray.stats = JSON.stringify(stingray.stats);
+    const stingrayINSERT = DATABASE.stingray.prepare('INSERT INTO stingray VALUES (@id, @isDark, @gender, @meal, @lang, @vkId, @vkIntegrated, @tgId, @tgIntegrated, @stats)');
+    stingrayINSERT.run(stingray);
+
+    stingray.stats = JSON.parse(stingray.stats);
     res.json(stingray);
 };
+
+function makeid(length) {
+    var result = '';
+    var characters = '0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}

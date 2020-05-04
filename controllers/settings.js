@@ -1,28 +1,4 @@
-const youtube = require('../helpers/youtube');
-
-/**
- * GET /settings
- * get settings
- */
-exports.getSettings = (req, res) => {
-    res.json("SETTINGS!");
-};
-
-/**
- * GET /settings/themechange
- * get settings/themechange
- */
-exports.themeChange = (req, res) => {
-    res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).assign({
-        isDark: req.query.isDark = (req.query.isDark === 'true')
-    }).write();
-
-    return res.json({
-        changed: true
-    });
-};
+const DATABASE = require('../db');
 
 /**
  * GET /settings/update/stingray
@@ -30,24 +6,26 @@ exports.themeChange = (req, res) => {
  */
 exports.updateStingray = (req, res) => {
     let assings = {};
+    const sqlSET = [];
     const params = ['isDark', 'gender', 'meal', 'lang'];
     for (const field of params) {
         if (req.query[field]) {
             assings[field] = req.query[field];
+            sqlSET.push(`${field} = @${field}`);
         }
     }
 
     if (assings.isDark) {
-        assings.isDark = (assings.isDark === 'true');
+        assings.isDark = (assings.isDark === 'true') ? 1 : 0;
     }
 
     if (assings.meal) {
-        assings.meal = (assings.meal === 'true');
+        assings.meal = (assings.meal === 'true') ? 1 : 0;
     }
 
-    res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).assign(assings).write();
+
+    let stingrayUpdate = DATABASE.stingray.prepare(`UPDATE stingray SET ${sqlSET.join(', ')} WHERE id = ?`);
+    stingrayUpdate = stingrayUpdate.run(assings, req.query.stingray);
 
     return res.json({
         updated: true

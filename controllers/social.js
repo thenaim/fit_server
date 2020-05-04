@@ -1,20 +1,16 @@
-const nutritionController = require('../controllers/nutrition');
+const DATABASE = require('../db');
 
 /**
  * GET /send/social
  * send message to social network
  */
 exports.sendSocial = (req, res) => {
-    const stingray = res.db.get('stingrays').find({
-        id: req.query.stingray
-    }).value();
+    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
 
     if (req.query.type === "exercise") {
-        const exercise = res.db.get('exercises').find({
-            lang: 'ru',
-            gender: 'man',
-            id: +req.query.id
-        }).value();
+        const exercise = DATABASE[stingray.gender].prepare(`SELECT exercises.id, exercises.name, exercises.text, foto.name AS img_name, foto.number
+            FROM exercises INNER JOIN foto ON foto.id_exercise = exercises.id_exercise
+        WHERE exercises.id = ?`).get(+req.query.id);
 
         const message = `${exercise.name}\n\n${exercise.text}`;
         if (req.query.social === "vk" && stingray.vkIntegrated) {
@@ -34,9 +30,9 @@ exports.sendSocial = (req, res) => {
     }
 
     if (req.query.type === "nutrition") {
-        let nutrition = res.db.get(`meals`).find({
+        const nutrition = DATABASE.stingray.prepare(`SELECT * FROM nutritions WHERE id = @id`).get({
             id: req.query.id
-        }).value();
+        });
 
         const message = `${nutrition.name}\n\n${nutrition.steps}\n\n${nutrition.ingredients}`;
         if (req.query.social === "vk" && stingray.vkIntegrated) {
