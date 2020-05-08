@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 const stingrayController = require('./controllers/stingray');
 const bookmarkController = require('./controllers/bookmark');
 const exercisesController = require('./controllers/exercises');
+const workoutsController = require('./controllers/workouts');
 const nutritionController = require('./controllers/nutrition');
 const settingsController = require('./controllers/settings');
 const videoController = require('./controllers/video');
@@ -52,6 +53,9 @@ const statsController = require('./controllers/stats');
  */
 const passportConfig = require('./config/passport');
 
+/**
+ * App routes.
+ */
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -62,6 +66,9 @@ app.get('/bookmarks', passportConfig.authTokenValidator, bookmarkController.getB
 app.get('/bookmarks/addDelete', passportConfig.authTokenValidator, bookmarkController.addDeleteBookmarks);
 app.get('/exercises', passportConfig.authTokenValidator, exercisesController.getExercises);
 app.get('/exercise/categories', passportConfig.authTokenValidator, exercisesController.getExercisesCategories);
+app.get('/workouts', passportConfig.authTokenValidator, workoutsController.getWorkuots);
+app.get('/workouts/category', passportConfig.authTokenValidator, workoutsController.getWorkuotsCategory);
+app.get('/workouts/days', passportConfig.authTokenValidator, workoutsController.getWorkuotsDays);
 app.get('/nutritions', passportConfig.authTokenValidator, nutritionController.getNutritions);
 app.get('/social/send', passportConfig.authTokenValidator, socialController.sendSocial);
 app.get('/stats', passportConfig.authTokenValidator, statsController.addStats);

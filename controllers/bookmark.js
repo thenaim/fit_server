@@ -75,9 +75,11 @@ exports.addDeleteBookmarks = (req, res) => {
         type: req.query.type
     };
 
-    const checkBookmark = DATABASE.stingray.prepare(`SELECT * FROM bookmarks WHERE stingray = @stingray AND id_type = @id_type AND type = @type`).get(
-        bookmark
-    );
+    const checkBookmark = DATABASE.stingray.prepare(`SELECT * FROM bookmarks WHERE stingray = @stingray AND id_type = @id_type AND type = @type`).get({
+        stingray: stingray.id,
+        id_type: req.query.id,
+        type: req.query.type
+    });
 
     if (checkBookmark) {
         const deleteBookmark = DATABASE.stingray.prepare(`DELETE FROM bookmarks WHERE id = ?`).run(

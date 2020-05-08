@@ -12,12 +12,11 @@ const Scene = require('node-vk-bot-api/lib/scene');
 const Markup = require('node-vk-bot-api/lib/markup');
 const session = new Session();
 
-
 const scene = new Scene('integrate',
     (ctx) => {
         ctx.scene.next();
-        ctx.reply(`Отправьте сюда ID приложения fitSmart в вашей приставке. В настройках приложении.\n\nПример: 12345678`, null, Markup.keyboard([
-            'Интеграция с приложением fitSmart'
+        ctx.reply(`Отправьте сюда ID приложения FitSmart в вашей приставке. В настройках приложении.\n\nПример: 12345678`, null, Markup.keyboard([
+            'Интеграция с приложением FitSmart'
         ]));
     },
     (ctx) => {
@@ -34,9 +33,10 @@ const scene = new Scene('integrate',
                 id: stingray.id
             });
             return ctx.reply(`Успешно интегрирован.\n\nID: ${stingray.id}`, null, Markup.keyboard([
-                'Интеграция с приложением fitSmart',
                 'Остановить'
-            ]));
+            ], {
+                columns: 1
+            }));
         }
 
         ctx.reply('ID приложения не найдено(');
@@ -46,7 +46,7 @@ const stage = new Stage(scene);
 vk.use(session.middleware());
 vk.use(stage.middleware());
 
-vk.command('Интеграция с приложением fitSmart', (ctx) => {
+vk.command('Интеграция с приложением FitSmart', (ctx) => {
     const stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE vkId = @vkId`).get({
         vkId: +ctx.message.from_id
     });
@@ -72,7 +72,7 @@ vk.command('Остановить', (ctx) => {
             id: stingray.id
         });
         return ctx.reply(`Интеграция с приложением остановлен.`, null, Markup.keyboard([
-            'Интеграция с приложением fitSmart'
+            'Интеграция с приложением FitSmart'
         ]));
     }
     ctx.scene.enter('integrate');
@@ -85,13 +85,18 @@ vk.on((ctx) => {
 
     if (stingray) {
         return ctx.reply(`Приложение уже интегрирован.\n\nID: ${stingray.id}\n\nПопробуйте отправить из приложения FitSmart упражнения или рецепты.\n\nPS: Чтобы остановить интеграцию нажмите на кнопку: Остановить.`, null, Markup.keyboard([
-            'Интеграция с приложением fitSmart',
             'Остановить'
-        ]));
+        ], {
+            columns: 1
+        }));
     }
     ctx.reply('Нажмите на кнопку, чтобы начать интегрировать наше приложение в вашей приставке', null, Markup.keyboard([
-        'Интеграция с приложением fitSmart'
+        'Интеграция с приложением FitSmart'
     ]));
+});
+
+vk.on((ctx) => {
+    ctx.scene.enter('integrate');
 });
 
 vk.startPolling(() => {

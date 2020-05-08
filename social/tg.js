@@ -27,7 +27,6 @@ tg.onText(/\/start/, (msg) => {
         return tg.sendMessage(chatId, `Приложение уже интегрирован.\n\nID: ${stingray.id}\n\nПопробуйте отправить из приложения FitSmart упражнения или рецепты.\n\nPS: Чтобы остановить интеграцию нажмите на кнопку: Остановить.`, {
             "reply_markup": {
                 "keyboard": [
-                    ["Интеграция с приложением fitSmart"],
                     ["Остановить"]
                 ]
             }
@@ -36,14 +35,14 @@ tg.onText(/\/start/, (msg) => {
     tg.sendMessage(chatId, "Нажмите на кнопку, чтобы начать интегрировать наше приложение в вашей приставке", {
         "reply_markup": {
             "keyboard": [
-                ["Интеграция с приложением fitSmart"]
+                ["Интеграция с приложением FitSmart"]
             ]
         }
     });
 
 });
 
-tg.onText(/\Интеграция с приложением fitSmart/, (msg) => {
+tg.onText(/\Интеграция с приложением FitSmart/, (msg) => {
     const chatId = msg.chat.id;
     const stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE tgId = ?`).get(chatId);
 
@@ -51,16 +50,15 @@ tg.onText(/\Интеграция с приложением fitSmart/, (msg) => {
         return tg.sendMessage(chatId, `Приложение уже интегрирован.\n\nID: ${stingray.id}\n\nПопробуйте отправить из приложения FitSmart упражнения или рецепты.\n\nPS: Чтобы остановить интеграцию нажмите на кнопку: Остановить.`, {
             "reply_markup": {
                 "keyboard": [
-                    ["Интеграция с приложением fitSmart"],
                     ["Остановить"]
                 ]
             }
         });
     }
-    tg.sendMessage(chatId, `Отправьте сюда ID приложения fitSmart в вашей приставке. В настройках приложении.\n\nПример: 12345678`, {
+    tg.sendMessage(chatId, `Отправьте сюда ID приложения FitSmart в вашей приставке. В настройках приложении.\n\nПример: 12345678`, {
         "reply_markup": {
             "keyboard": [
-                ["Интеграция с приложением fitSmart"]
+                ["Интеграция с приложением FitSmart"]
             ]
         }
     });
@@ -74,7 +72,6 @@ tg.onText(/^[0-9]{8,}/, (msg) => {
         return tg.sendMessage(chatId, `Приложение уже интегрирован.\n\nID: ${stingray.id}\n\nПопробуйте отправить из приложения FitSmart упражнения или рецепты.\n\nPS: Чтобы остановить интеграцию нажмите на кнопку: Остановить.`, {
             "reply_markup": {
                 "keyboard": [
-                    ["Интеграция с приложением fitSmart"],
                     ["Остановить"]
                 ]
             }
@@ -92,7 +89,6 @@ tg.onText(/^[0-9]{8,}/, (msg) => {
         return tg.sendMessage(chatId, `Успешно интегрирован.\n\nID: ${msg.text}\n\nПопробуйте отправить из приложения FitSmart упражнения или рецепты.`, {
             "reply_markup": {
                 "keyboard": [
-                    ["Интеграция с приложением fitSmart"],
                     ["Остановить"]
                 ]
             }
@@ -101,7 +97,7 @@ tg.onText(/^[0-9]{8,}/, (msg) => {
     tg.sendMessage(chatId, `ID приложения не найдено(. Попробуйте ещё раз.`, {
         "reply_markup": {
             "keyboard": [
-                ["Интеграция с приложением fitSmart"]
+                ["Интеграция с приложением FitSmart"]
             ]
         }
     });
@@ -121,15 +117,15 @@ tg.onText(/\Остановить/, (msg) => {
         return tg.sendMessage(chatId, "Интеграция с приложением остановлен.", {
             "reply_markup": {
                 "keyboard": [
-                    ["Интеграция с приложением fitSmart"]
+                    ["Интеграция с приложением FitSmart"]
                 ]
             }
         });
     }
-    tg.sendMessage(chatId, `Отправьте сюда ID приложения fitSmart в вашей приставке. В настройках приложении.\n\nПример: 12345678`, {
+    tg.sendMessage(chatId, `Отправьте сюда ID приложения FitSmart в вашей приставке. В настройках приложении.\n\nПример: 12345678`, {
         "reply_markup": {
             "keyboard": [
-                ["Интеграция с приложением fitSmart"]
+                ["Интеграция с приложением FitSmart"]
             ]
         }
     });

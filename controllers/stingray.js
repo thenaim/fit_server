@@ -16,6 +16,7 @@ exports.getKeys = (req, res) => {
         isDark: 1, // dark|light
         gender: 'woman', // man|woman
         meal: 1, // muscle_building|weight_loss
+        workoutDays: 1, // 1|2|3 - 2|3|4 days per week
         lang: 'ru',
         vkId: '',
         vkIntegrated: 0,
@@ -68,7 +69,7 @@ exports.getKeys = (req, res) => {
 
     // Save sqlite
     stingray.stats = JSON.stringify(stingray.stats);
-    const stingrayINSERT = DATABASE.stingray.prepare('INSERT INTO stingray VALUES (@id, @isDark, @gender, @meal, @lang, @vkId, @vkIntegrated, @tgId, @tgIntegrated, @stats)');
+    const stingrayINSERT = DATABASE.stingray.prepare('INSERT INTO stingray VALUES (@id, @isDark, @gender, @meal, @lang, @vkId, @vkIntegrated, @tgId, @tgIntegrated, @stats, @workoutDays)');
     stingrayINSERT.run(stingray);
 
     stingray.stats = JSON.parse(stingray.stats);
