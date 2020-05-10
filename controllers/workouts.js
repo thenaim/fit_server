@@ -70,5 +70,9 @@ exports.getWorkuots = (req, res) => {
         }
     });
 
+    workouts.sort((a, b) => {
+        return (parseInt(a.day) - parseInt(b.day));
+    });
+
     return res.json(workouts);
 };

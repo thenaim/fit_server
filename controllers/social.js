@@ -1,3 +1,4 @@
+const exercisesController = require('./exercises');
 const FormData = require('form-data');
 const path = require('path');
 const DATABASE = require('../db');
@@ -12,9 +13,10 @@ exports.sendSocial = async (req, res) => {
     let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
 
     if (req.query.type === "exercise") {
-        const exercise = DATABASE[stingray.gender].prepare(`SELECT exercises.id, exercises.name, exercises.text, foto.name AS img_name, foto.number
+        let exercise = DATABASE[stingray.gender].prepare(`SELECT exercises.id, exercises.name, exercises.text, foto.name AS img_name, foto.number
             FROM exercises INNER JOIN foto ON foto.id_exercise = exercises.id_exercise
         WHERE exercises.id = ? AND exercises.lang = ?`).get(+req.query.id, stingray.lang);
+        exercise.images = exercisesController.addImages(stingray.gender, exercise.img_name, exercise.number);
 
         const message = `${exercise.name}\n\n${exercise.text}`;
         if (req.query.social === "vk" && stingray.vkIntegrated) {
@@ -26,7 +28,10 @@ exports.sendSocial = async (req, res) => {
         }
 
         if (req.query.social === "tg" && stingray.tgIntegrated) {
-            res.tg.sendMessage(stingray.tgId, message);
+            const imagePath = path.resolve(__dirname, '../public/images/img/' + exercise.images[0]);
+            res.tg.sendPhoto(stingray.tgId, fs.readFileSync(imagePath), {
+                caption: message
+            });
             return res.json({
                 sended: true
             });
@@ -55,7 +60,13 @@ exports.sendSocial = async (req, res) => {
         }
 
         if (req.query.social === "tg" && stingray.tgIntegrated) {
-            res.tg.sendMessage(stingray.tgId, message);
+            nutrition.image = nutrition.image.split('.');
+            nutrition.image = nutrition.image[0] + '.jpg';
+            const imagePath = path.resolve(__dirname, '../public/images/coverMeal/' + nutrition.image);
+            res.tg.sendPhoto(stingray.tgId, fs.readFileSync(imagePath), {
+                caption: message
+            });
+
             return res.json({
                 sended: true
             });
