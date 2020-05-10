@@ -13,9 +13,15 @@ exports.getWorkuotsDays = (req, res) => {
         lang: stingray.lang
     });
 
-    const final = [];
+    let final = {
+        title: {
+            ru: 'Сколько дней в неделю вы готовы тренироваться?',
+            en: 'How many days a week are you ready to train?'
+        },
+        items: []
+    };
     days.forEach(element => {
-        final.push({
+        final.items.push({
             id: element.id_day,
             data: element.title
         });
