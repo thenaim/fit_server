@@ -1,8 +1,6 @@
 exports.authTokenValidator = (req, res, next) => {
     const auth = req.query.token;
-    const simpleAuthToken = "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4";
-
-    if (auth === simpleAuthToken) {
+    if (auth === process.env.AUTH_TOKEN) {
         next();
     } else {
         res.status(401).json({
