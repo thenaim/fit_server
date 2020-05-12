@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 app.get('/stingray', passportConfig.authTokenValidator, stingrayController.getKeys);
-app.get('/save', passportConfig.authTokenValidator, videoController.saveVideo);
+app.get('/save', /*passportConfig.authTokenValidator,*/ videoController.saveVideo);
 app.get('/videos', passportConfig.authTokenValidator, videoController.getVideos);
 app.get('/bookmarks', passportConfig.authTokenValidator, bookmarkController.getBookmarks);
 app.get('/bookmarks/addDelete', passportConfig.authTokenValidator, bookmarkController.addDeleteBookmarks);

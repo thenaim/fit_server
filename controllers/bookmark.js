@@ -14,11 +14,18 @@ exports.getBookmarks = (req, res) => {
     );
 
     if (req.query.type === "video") {
-        const videos = res.db.get('videos').value();
+        const videos = DATABASE.stingray.prepare(`SELECT * FROM videos WHERE gender = ? AND lang = ?`).all(
+            stingray.gender,
+            stingray.lang
+        );
+        const videosParsed = [];
+        videos.forEach(element => {
+            videosParsed.push(JSON.parse(element.video));
+        });
         const videosFinal = [];
 
         bookmarks.forEach(element => {
-            const vid = videos.find(x => x.videoId === element.id_type);
+            const vid = videosParsed.find(x => x.videoId === element.id_type);
             if (vid) {
                 vid.bookmark = true;
                 videosFinal.push(vid);
