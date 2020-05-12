@@ -12,6 +12,8 @@ node_modules
 modules/.settings
 modules/.vscode
 
+public/videos
+
 # Ignore npm/yarn debug log
 npm-debug.log
 yarn-error.log
