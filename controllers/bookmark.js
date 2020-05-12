@@ -67,7 +67,8 @@ exports.getBookmarks = (req, res) => {
  * add or delete user bookmark
  */
 exports.addDeleteBookmarks = (req, res) => {
-    const stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
+    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
+    stingray.stats = JSON.parse(stingray.stats);
 
     let bookmark = {
         stingray: stingray.id,
@@ -86,19 +87,19 @@ exports.addDeleteBookmarks = (req, res) => {
             checkBookmark.id
         );
         bookmark.added = false;
-        return res.json(bookmark);
+    } else {
+        const bookmarkINSERT = DATABASE.stingray.prepare('INSERT INTO bookmarks VALUES (NULL, @id_type, @type, @stingray)');
+        bookmarkINSERT.run(bookmark);
+        bookmark.added = true;
     }
-
-    const bookmarkINSERT = DATABASE.stingray.prepare('INSERT INTO bookmarks VALUES (NULL, @id_type, @type, @stingray)');
-    bookmarkINSERT.run(bookmark);
-    bookmark.added = true;
 
     // Add fit points for add/delete bookmark
     stingray.stats[0].points += 1;
+    stingray.stats = JSON.stringify(stingray.stats);
 
     let stingrayUpdate = DATABASE.stingray.prepare(`UPDATE stingray SET stats = @stats WHERE id = @id`);
     stingrayUpdate.run({
-        stats: JSON.stringify(stingray.stats),
+        stats: stingray.stats,
         id: stingray.id
     });
 

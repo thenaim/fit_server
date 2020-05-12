@@ -20,11 +20,21 @@ exports.getWorkuotsDays = (req, res) => {
         },
         items: []
     };
-    days.forEach(element => {
+    days.forEach((element, index) => {
         final.items.push({
             id: element.id_day,
             data: element.title
         });
+        // add cancel on end
+        if (index === days.length - 1) {
+            final.items.push({
+                id: "cancel",
+                data: {
+                    ru: "Отменить",
+                    en: "Cancel"
+                }
+            });
+        }
     });
 
     return res.json(final);
