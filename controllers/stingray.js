@@ -1,4 +1,5 @@
 const DATABASE = require('../db');
+const statsController = require('./stats');
 
 /**
  * GET /stingray
@@ -8,6 +9,7 @@ exports.getKeys = (req, res) => {
     let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
     if (stingray) {
         stingray.stats = JSON.parse(stingray.stats);
+        stingray.leaderboard = statsController.leaderboard(stingray.id);
         return res.json(stingray);
     }
 
@@ -73,6 +75,7 @@ exports.getKeys = (req, res) => {
     stingrayINSERT.run(stingray);
 
     stingray.stats = JSON.parse(stingray.stats);
+    stingray.leaderboard = statsController.leaderboard(stingray.id);
     res.json(stingray);
 };
 

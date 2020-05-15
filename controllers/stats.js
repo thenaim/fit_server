@@ -1,6 +1,30 @@
 const DATABASE = require('../db');
 
 /**
+ * Leaderboard
+ */
+exports.leaderboard = (stingrayId) => {
+    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray`).all();
+    const leaderboard = [];
+    stingray.forEach((stin) => {
+        stin.stats = JSON.parse(stin.stats);
+        if (stin.id !== stingrayId) {
+            stin.id = stin.id.slice(0, -4) + '****';
+        }
+        stin.points = 0;
+        stin.stats.forEach(stat => {
+            stin.points += stat.points;
+        });
+        leaderboard.push({
+            id: stin.id,
+            points: stin.points
+        });
+    });
+
+    return leaderboard.sort((a, b) => b.points - a.points).slice(0, 5);
+};
+
+/**
  * GET /stats
  */
 exports.addStats = (req, res) => {

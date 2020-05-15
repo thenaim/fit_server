@@ -14,19 +14,11 @@ exports.getBookmarks = (req, res) => {
     );
 
     if (req.query.type === "video") {
-        const videos = DATABASE.stingray.prepare(`SELECT * FROM videos WHERE gender = ? AND lang = ?`).all(
-            stingray.gender,
-            stingray.lang
-        );
-        const videosParsed = [];
-        videos.forEach(element => {
-            videosParsed.push(JSON.parse(element.video));
-        });
         const videosFinal = [];
-
         bookmarks.forEach(element => {
-            const vid = videosParsed.find(x => x.videoId === element.id_type);
+            let vid = DATABASE.stingray.prepare(`SELECT * FROM videos WHERE video LIKE '%${element.id_type}%'`).get();
             if (vid) {
+                vid = JSON.parse(vid.video);
                 vid.bookmark = true;
                 videosFinal.push(vid);
             }
