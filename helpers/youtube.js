@@ -1,19 +1,12 @@
 const ytdl = require('ytdl-core');
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('./assets/DB/db.json');
-const db = low(adapter);
-const fs = require('fs');
-
 const DATABASE = require('../db');
 
 function saveVideo(params) {
     return new Promise(function (resolve, reject) {
-        const videos = db.get('videos').find({
-            videoId: params.v
-        }).value();
 
-        if (videos) return resolve('video_exist');
+        const video = DATABASE.stingray.prepare(`SELECT * FROM videos WHERE video LIKE '%${params.v}%'`).get();
+
+        if (video) return resolve('video_exist');
 
         ytdl.getInfo(params.v, (err, info) => {
             if (err || !info) return reject('not_found');
