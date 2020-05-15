@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.vk = vkInitFunction.vkInit();
     res.tg = tgInitFunction.tgInit();
+    next();
 });
 
 /**
