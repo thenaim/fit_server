@@ -1,7 +1,6 @@
-const fs = require('fs');
 const youtube = require('../helpers/youtube');
-
 const DATABASE = require('../db');
+
 /**
  * GET /watch
  * save video and download

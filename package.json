@@ -1,12 +1,12 @@
 {
-  "name": "gs_server",
+  "name": "fit_server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Naim",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
@@ -17,7 +17,6 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "form-data": "^3.0.0",
-    "lowdb": "^1.0.0",
     "node-telegram-bot-api": "^0.40.0",
     "node-vk-bot-api": "^3.3.3",
     "path": "^0.12.7",

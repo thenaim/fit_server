@@ -7,10 +7,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const low = require('lowdb');
-const FileAsync = require('lowdb/adapters/FileAsync');
-const adapter = new FileAsync('./assets/DB/db.json');
-
 /**
  * Social network bots
  */
@@ -28,11 +24,6 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.vk = vkInitFunction.vkInit();
     res.tg = tgInitFunction.tgInit();
-
-    low(adapter).then((db) => {
-        res.db = db;
-        next();
-    });
 });
 
 /**
