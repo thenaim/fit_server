@@ -4,8 +4,12 @@ const options = {
     fileMustExist: true
 };
 
-exports.stingray = new Database('./assets/DB/stingray.db', options);
-exports.man = new Database('./assets/DB/man.db', options);
-exports.woman = new Database('./assets/DB/woman.db', options);
+try {
+    exports.stingray = new Database('./assets/DB/stingray.db', options);
+    exports.man = new Database('./assets/DB/man.db', options);
+    exports.woman = new Database('./assets/DB/woman.db', options);
 
-console.log('Successfully connected to the SQLite database.');
+    console.log('Successfully connected to the SQLite database.');
+} catch (error) {
+    console.log(error);
+}

@@ -49,10 +49,12 @@ const passportConfig = require('./config/passport');
  * App routes.
  */
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {
+        app_name: process.env.APP_NAME
+    });
 });
 app.get('/stingray', passportConfig.authTokenValidator, stingrayController.getKeys);
-app.get('/save', /*passportConfig.authTokenValidator,*/ videoController.saveVideo);
+app.get('/save', passportConfig.authTokenValidator, videoController.saveVideo);
 app.get('/videos', passportConfig.authTokenValidator, videoController.getVideos);
 app.get('/bookmarks', passportConfig.authTokenValidator, bookmarkController.getBookmarks);
 app.get('/bookmarks/addDelete', passportConfig.authTokenValidator, bookmarkController.addDeleteBookmarks);
@@ -70,5 +72,5 @@ app.get('/settings/update/stingray', passportConfig.authTokenValidator, settings
  * Start Nodejs Express server.
  */
 app.listen(process.env.PORT, process.env.IPV4, () => {
-    console.log(`FitSmart server is running at http://${process.env.IPV4}:${process.env.PORT}`);
+    console.log(`${process.env.APP_NAME} server is running at http://${process.env.IPV4}:${process.env.PORT}`);
 });

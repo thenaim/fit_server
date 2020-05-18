@@ -15,8 +15,8 @@ const session = new Session();
 const scene = new Scene('integrate',
     (ctx) => {
         ctx.scene.next();
-        ctx.reply(`Отправьте сюда ID приложения FitSmart в вашей приставке. В настройках приложении.\n\nПример: 12345678`, null, Markup.keyboard([
-            'Интеграция с приложением FitSmart'
+        ctx.reply(`Отправьте сюда ID приложения ${process.env.APP_NAME} в вашей приставке. В настройках приложении.\n\nПример: 12345678`, null, Markup.keyboard([
+            `Интеграция с приложением ${process.env.APP_NAME}`
         ]));
     },
     (ctx) => {
@@ -46,7 +46,7 @@ const stage = new Stage(scene);
 vk.use(session.middleware());
 vk.use(stage.middleware());
 
-vk.command('Интеграция с приложением FitSmart', (ctx) => {
+vk.command(`Интеграция с приложением ${process.env.APP_NAME}`, (ctx) => {
     const stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE vkId = @vkId`).get({
         vkId: +ctx.message.from_id
     });
@@ -72,7 +72,7 @@ vk.command('Остановить', (ctx) => {
             id: stingray.id
         });
         return ctx.reply(`Интеграция с приложением остановлен.`, null, Markup.keyboard([
-            'Интеграция с приложением FitSmart'
+            `Интеграция с приложением ${process.env.APP_NAME}`
         ]));
     }
     ctx.scene.enter('integrate');
@@ -84,14 +84,14 @@ vk.on((ctx) => {
     });
 
     if (stingray) {
-        return ctx.reply(`Приложение уже интегрирован.\n\nID: ${stingray.id}\n\nПопробуйте отправить из приложения FitSmart упражнения или рецепты.\n\nPS: Чтобы остановить интеграцию нажмите на кнопку: Остановить.`, null, Markup.keyboard([
+        return ctx.reply(`Приложение уже интегрирован.\n\nID: ${stingray.id}\n\nПопробуйте отправить из приложения ${process.env.APP_NAME} упражнения или рецепты.\n\nPS: Чтобы остановить интеграцию нажмите на кнопку: Остановить.`, null, Markup.keyboard([
             'Остановить'
         ], {
             columns: 1
         }));
     }
     ctx.reply('Нажмите на кнопку, чтобы начать интегрировать наше приложение в вашей приставке', null, Markup.keyboard([
-        'Интеграция с приложением FitSmart'
+        `Интеграция с приложением ${process.env.APP_NAME}`
     ]));
 });
 
@@ -100,7 +100,7 @@ vk.on((ctx) => {
 });
 
 vk.startPolling(() => {
-    console.log(`FitSmart is integrated with VK BOT ${process.env.VK_BOT} or search ${process.env.SHORT}`);
+    console.log(`${process.env.APP_NAME} is integrated with VK BOT ${process.env.VK_BOT} or search ${process.env.SHORT}`);
 });
 
 /**
