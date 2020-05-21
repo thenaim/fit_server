@@ -1,6 +1,15 @@
+<p align="center"><img src="https://raw.githubusercontent.com/thenaim/fit_app/master/res/light_logo.png"></p>
+
 # FitServer
 
-NodeJs server for Home Fitness App [fit_app](https://github.com/thenaim/fit_app)
+NodeJs server for Fitness App [fit_app](https://github.com/thenaim/fit_app)
+
+# Main Dependencies
+
+- [better-sqlite3](https://github.com/JoshuaWise/better-sqlite3) - The fastest and simplest library for SQLite3 in Node.js.
+- [ytdl-core](https://github.com/fent/node-ytdl-core) - YouTube video downloader in javascript.
+- [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) - Telegram Bot API for NodeJS
+- [node-vk-bot-api](https://github.com/node-vk-bot-api/node-vk-bot-api) - VK bot framework for Node.js
 
 ## License
 
