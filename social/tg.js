@@ -5,9 +5,11 @@ const DATABASE = require('../db');
  */
 const TelegramBot = require('node-telegram-bot-api');
 const Agent = require('socks5-https-client/lib/Agent');
-const tg = new TelegramBot(process.env.TG_TOKEN, {
-    polling: false,
-    request: {
+let options = {
+    polling: false
+};
+if (process.env.socksConnection === "true") {
+    options.request = {
         agentClass: Agent,
         agentOptions: {
             socksHost: process.env.socksHost,
@@ -17,7 +19,9 @@ const tg = new TelegramBot(process.env.TG_TOKEN, {
             socksPassword: process.env.socksPassword
         }
     }
-});
+}
+
+const tg = new TelegramBot(process.env.TG_TOKEN, options);
 
 tg.onText(new RegExp(`/start`), (msg) => {
     const chatId = msg.chat.id;
@@ -133,7 +137,7 @@ tg.onText(/\Остановить/, (msg) => {
 
 tg.startPolling().then(() => {
     console.log(`${process.env.APP_NAME} is integrated with TG BOT ${process.env.TG_BOT} or search ${process.env.SHORT}`);
-});
+}).catch((err) => console.log(err));
 
 /**
  * Telegram bot init function
