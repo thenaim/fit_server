@@ -1,8 +1,10 @@
-<p align="center"><img src="https://raw.githubusercontent.com/thenaim/fit_app/master/res/light_logo.png"></p>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/thenaim/fit_app/master/res/light_logo.png">
+</p>
 
 # FitServer
 
-NodeJs server for Fitness App [fit_app](https://github.com/thenaim/fit_app)
+NodeJs server for Fitness App. For more information and installation guide see: [fit_app](https://github.com/thenaim/fit_app)
 
 # Main Dependencies
 
