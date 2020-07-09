@@ -8,18 +8,6 @@ const Agent = require('socks5-https-client/lib/Agent');
 let options = {
     polling: false
 };
-if (process.env.socksConnection === "true") {
-    options.request = {
-        agentClass: Agent,
-        agentOptions: {
-            socksHost: process.env.socksHost,
-            socksPort: process.env.socksPort,
-            // If authorization is needed:
-            socksUsername: process.env.socksUsername,
-            socksPassword: process.env.socksPassword
-        }
-    }
-}
 
 const tg = new TelegramBot(process.env.TG_TOKEN, options);
 
