@@ -16,7 +16,7 @@ exports.getBookmarks = (req, res) => {
     if (req.query.type === "video") {
         const videosFinal = [];
         bookmarks.forEach(element => {
-            let vid = DATABASE.stingray.prepare(`SELECT * FROM videos WHERE video LIKE '%${element.id_type}%'`).get();
+            let vid = DATABASE.stingray.prepare(`SELECT * FROM videos WHERE video LIKE '%${element.id_type}%' AND gender = ? `).get(stingray.gender);
             if (vid) {
                 vid = JSON.parse(vid.video);
                 vid.bookmark = true;

@@ -27,45 +27,45 @@ exports.getKeys = (req, res) => {
 
         // Stats
         stats: [{
-                name: {
-                    ru: "FIT баллы",
-                    en: "FIT points"
-                },
-                points: 0,
-                colors: "#0779e4"
+            name: {
+                ru: "FIT баллы",
+                en: "FIT points"
             },
-            {
-                name: {
-                    ru: "Просмотры Видео",
-                    en: "Video views"
-                },
-                points: 0,
-                colors: "#511845"
+            points: 64,
+            colors: "#0779e4"
+        },
+        {
+            name: {
+                ru: "Просмотры Видео",
+                en: "Video views"
             },
-            {
-                name: {
-                    ru: "Просмотры упражнений",
-                    en: "Exercise views"
-                },
-                points: 0,
-                colors: "#eb4559"
+            points: 161,
+            colors: "#511845"
+        },
+        {
+            name: {
+                ru: "Просмотры упражнений",
+                en: "Exercise views"
             },
-            {
-                name: {
-                    ru: "Просмотры рецептов",
-                    en: "Nutrition views"
-                },
-                points: 0,
-                colors: "#ffe75e"
+            points: 33,
+            colors: "#eb4559"
+        },
+        {
+            name: {
+                ru: "Просмотры рецептов",
+                en: "Nutrition views"
             },
-            {
-                name: {
-                    ru: "Социальные сети",
-                    en: "Social networks"
-                },
-                points: 0,
-                colors: "#7fa998"
-            }
+            points: 56,
+            colors: "#ffe75e"
+        },
+        {
+            name: {
+                ru: "Социальные сети",
+                en: "Social networks"
+            },
+            points: 21,
+            colors: "#7fa998"
+        }
         ]
     };
 
@@ -73,6 +73,8 @@ exports.getKeys = (req, res) => {
     stingray.stats = JSON.stringify(stingray.stats);
     const stingrayINSERT = DATABASE.stingray.prepare('INSERT INTO stingray VALUES (@id, @isDark, @gender, @meal, @lang, @vkId, @vkIntegrated, @tgId, @tgIntegrated, @stats, @workoutDays)');
     stingrayINSERT.run(stingray);
+
+    addExampleBookmarks(stingray.id);
 
     stingray.stats = JSON.parse(stingray.stats);
     stingray.leaderboard = statsController.leaderboard(stingray.id);
@@ -87,4 +89,54 @@ function makeid(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+}
+
+function addExampleBookmarks(id) {
+    const bookmarkINSERT = DATABASE.stingray.prepare('INSERT INTO bookmarks VALUES (NULL, @id_type, @type, @stingray)');
+    const exampleData = [
+        {
+            id_type: 'RZqZ4Xml-0o',
+            type: 'video',
+            stingray: id
+        },
+        {
+            id_type: 'bnzHECC0Z8A',
+            type: 'video',
+            stingray: id
+        },
+        {
+            id_type: 'PqQrqiqOM6U',
+            type: 'video',
+            stingray: id
+        },
+        {
+            id_type: '544',
+            type: 'exercise',
+            stingray: id
+        },
+        {
+            id_type: '545',
+            type: 'exercise',
+            stingray: id
+        },
+        {
+            id_type: '1zgda0zg5',
+            type: 'nutrition',
+            stingray: id
+        },
+        {
+            id_type: 'i3ey6tcla',
+            type: 'nutrition',
+            stingray: id
+        },
+        {
+            id_type: 'xrwu6l2zh',
+            type: 'nutrition',
+            stingray: id
+        }
+    ];
+
+    exampleData.forEach((element) => {
+        bookmarkINSERT.run(element);
+    })
 }
