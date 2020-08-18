@@ -9,13 +9,13 @@ require('dotenv').config();
 
 /**
  * Social network bots
- */
 if (process.env.VK_TOKEN) {
     const vkInitFunction = require('./social/vk');
 }
 if (process.env.TG_TOKEN) {
     const tgInitFunction = require('./social/tg');
 }
+ */
 
 /**
  * Express configuration.
@@ -27,9 +27,11 @@ app.use('/videos', express.static(__dirname + '/public/videos'));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
     if (process.env.VK_TOKEN) {
+        const vkInitFunction = require('./social/vk');
         res.vk = vkInitFunction.vkInit();
     }
     if (process.env.TG_TOKEN) {
+        const tgInitFunction = require('./social/tg');
         res.tg = tgInitFunction.tgInit();
     }
     next();
