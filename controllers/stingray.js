@@ -6,7 +6,7 @@ const statsController = require('./stats');
  * returns id and ather keys
  */
 exports.getKeys = (req, res) => {
-    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
+    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get('48718619');
     if (stingray) {
         stingray.stats = JSON.parse(stingray.stats);
         stingray.leaderboard = statsController.leaderboard(stingray.id);
@@ -15,7 +15,7 @@ exports.getKeys = (req, res) => {
 
     stingray = {
         id: makeid(8),
-        isDark: 1, // dark|light
+        isDark: 0, // dark|light
         gender: 'woman', // man|woman
         meal: 1, // muscle_building|weight_loss
         workoutDays: 1, // 1|2|3 - 2|3|4 days per week
@@ -27,45 +27,45 @@ exports.getKeys = (req, res) => {
 
         // Stats
         stats: [{
-            name: {
-                ru: "FIT баллы",
-                en: "FIT points"
+                name: {
+                    ru: "FIT баллы",
+                    en: "FIT points"
+                },
+                points: 64,
+                colors: "#0779e4"
             },
-            points: 64,
-            colors: "#0779e4"
-        },
-        {
-            name: {
-                ru: "Просмотры Видео",
-                en: "Video views"
+            {
+                name: {
+                    ru: "Просмотры Видео",
+                    en: "Video views"
+                },
+                points: 248,
+                colors: "#511845"
             },
-            points: 161,
-            colors: "#511845"
-        },
-        {
-            name: {
-                ru: "Просмотры упражнений",
-                en: "Exercise views"
+            {
+                name: {
+                    ru: "Просмотры упражнений",
+                    en: "Exercise views"
+                },
+                points: 33,
+                colors: "#eb4559"
             },
-            points: 33,
-            colors: "#eb4559"
-        },
-        {
-            name: {
-                ru: "Просмотры рецептов",
-                en: "Nutrition views"
+            {
+                name: {
+                    ru: "Просмотры рецептов",
+                    en: "Nutrition views"
+                },
+                points: 56,
+                colors: "#ffe75e"
             },
-            points: 56,
-            colors: "#ffe75e"
-        },
-        {
-            name: {
-                ru: "Социальные сети",
-                en: "Social networks"
-            },
-            points: 21,
-            colors: "#7fa998"
-        }
+            {
+                name: {
+                    ru: "Социальные сети",
+                    en: "Social networks"
+                },
+                points: 21,
+                colors: "#7fa998"
+            }
         ]
     };
 
@@ -93,8 +93,7 @@ function makeid(length) {
 
 function addExampleBookmarks(id) {
     const bookmarkINSERT = DATABASE.stingray.prepare('INSERT INTO bookmarks VALUES (NULL, @id_type, @type, @stingray)');
-    const exampleData = [
-        {
+    const exampleData = [{
             id_type: 'RZqZ4Xml-0o',
             type: 'video',
             stingray: id

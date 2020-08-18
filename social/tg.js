@@ -125,7 +125,7 @@ tg.onText(/\Остановить/, (msg) => {
 
 tg.startPolling().then(() => {
     console.log(`${process.env.APP_NAME} is integrated with TG BOT ${process.env.TG_BOT} or search ${process.env.SHORT}`);
-}).catch((err) => console.log(err));
+});
 
 /**
  * Telegram bot init function
