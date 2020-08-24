@@ -6,7 +6,7 @@ const statsController = require('./stats');
  * returns id and ather keys
  */
 exports.getKeys = (req, res) => {
-    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get('48718619');
+    let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
     if (stingray) {
         stingray.stats = JSON.parse(stingray.stats);
         stingray.leaderboard = statsController.leaderboard(stingray.id);
