@@ -7,7 +7,7 @@ const DATABASE = require('../db');
 exports.updateStingray = (req, res) => {
     let assings = {};
     const sqlSET = [];
-    const params = ['isDark', 'gender', 'workoutDays', 'meal', 'lang'];
+    const params = ['isDark', 'gender', 'workoutDays', 'meal', 'lang', 'level'];
     for (const field of params) {
         if (req.query[field]) {
             assings[field] = req.query[field];

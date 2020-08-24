@@ -24,6 +24,7 @@ exports.getKeys = (req, res) => {
         vkIntegrated: 0,
         tgId: '',
         tgIntegrated: 0,
+        level: 'beginner',
 
         // Stats
         stats: [{
@@ -71,7 +72,7 @@ exports.getKeys = (req, res) => {
 
     // Save sqlite
     stingray.stats = JSON.stringify(stingray.stats);
-    const stingrayINSERT = DATABASE.stingray.prepare('INSERT INTO stingray VALUES (@id, @isDark, @gender, @meal, @lang, @vkId, @vkIntegrated, @tgId, @tgIntegrated, @stats, @workoutDays)');
+    const stingrayINSERT = DATABASE.stingray.prepare('INSERT INTO stingray VALUES (@id, @isDark, @gender, @meal, @lang, @vkId, @vkIntegrated, @tgId, @tgIntegrated, @stats, @workoutDays, @level)');
     stingrayINSERT.run(stingray);
 
     addExampleBookmarks(stingray.id);
