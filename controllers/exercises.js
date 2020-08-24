@@ -7,12 +7,24 @@ const DATABASE = require('../db');
 exports.getExercises = (req, res) => {
     let stingray = DATABASE.stingray.prepare(`SELECT * FROM stingray WHERE id = ?`).get(req.query.stingray);
 
+    let secondlevel = 'beginner';
+    let thirdlevel = 'beginner';
+    if (stingray.level === 'beginner' || stingray.level === 'experienced') {
+        secondlevel = 'beginner';
+    } else if (stingray.level === 'master') {
+        secondlevel = 'beginner';
+        thirdlevel = 'experienced';
+    }
+
     let exercises = DATABASE[stingray.gender].prepare(`SELECT exercises.id, exercises.name, exercises.text, foto.name AS img_name, foto.number
     FROM exercises INNER JOIN foto ON foto.id_exercise = exercises.id_exercise
-    WHERE lang = @lang and id_type = @id_type
+    WHERE lang = @lang and id_type = @id_type and (level = @level or level = @secondlevel or level = @thirdlevel)
     GROUP BY exercises.id`).all({
         lang: stingray.lang,
-        id_type: +req.query.id_type
+        id_type: +req.query.id_type,
+        level: stingray.level,
+        secondlevel: secondlevel,
+        thirdlevel: thirdlevel
     });
 
     exercises.forEach(element => {
